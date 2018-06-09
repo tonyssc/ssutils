@@ -11,7 +11,8 @@ coverage/*
 .svn/*
 
 # Editor directories and files
+.npmignore
 .vscode
 .idea
-/*.js
+*.js
 !.eslintrc.js

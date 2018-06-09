@@ -1,6 +1,6 @@
 {
-  "name": "ssutils",
-  "version": "1.0.0",
+  "name": "@ssports_fe/ssutils",
+  "version": "1.0.3",
   "description": "前端业务代码工具库",
   "main": "dist/ssutils.min.js",
   "scripts": {
