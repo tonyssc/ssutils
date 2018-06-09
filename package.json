@@ -1,0 +1,39 @@
+{
+  "name": "ssutils",
+  "version": "1.0.0",
+  "description": "前端业务代码工具库",
+  "main": "dist/ssutils.min.js",
+  "scripts": {
+    "build": "node script/build.js",
+    "build-copy": "node script/build-copy.js",
+    "build-pack": "node script/build-pack"
+  },
+  "repository": "https://github.com/tonyssc/ssutils",
+  "keywords": [
+    "util",
+    "tool",
+    "common-util"
+  ],
+  "author": "sunsc@ssports.com",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "chalk": "^2.4.1",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy": "^0.3.2",
+    "cross-env": "^5.1.6",
+    "eslint": "^4.19.1",
+    "eslint-config-alloy": "^1.4.2",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^2.0.0",
+    "ora": "^2.1.0",
+    "rimraf": "^2.6.2",
+    "webpack": "^4.11.1",
+    "webpack-cli": "^3.0.3"
+  }
+}
