@@ -1,10 +1,10 @@
 const webpack = require('webpack')
 const path = require('path')
-const rootPath = path.resolve(__dirname, '../')
+const rootPath = path.resolve(__dirname, './')
 
 module.exports = {
     mode: 'production',
-    entry: path.resolve(rootPath, 'src', 'index.js'),
+    entry: path.resolve(rootPath, '../src', 'index.js'),
     output: {
         filename: 'ssutils.min.js',
         path: path.resolve(rootPath, '../dist'),
