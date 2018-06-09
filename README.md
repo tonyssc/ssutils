@@ -8,7 +8,7 @@
 
 ## 安装使用
 
-1. 直接下载`dist`目录下的[ss-utils.min.js](https://github.com/tonyssc/ssutils/master/dist/ssutils.min.js)
+1. 直接下载`dist`目录下的[ssutils.min.js](https://github.com/tonyssc/ssutils/master/dist/ssutils.min.js)
 2. 使用yarn或者npm安装
 
 ### 浏览器
@@ -29,7 +29,17 @@ webpack、RequireJS、SeaJS等
 
 ``` javascript
 // 完整引入
-const ssutils = require('ssutils')
+const ssutils = require('@ssports_fe/ssutils')
 const browser = ssutils.browser()
+or
+import * as ssutils from '@ssports_fe/ssutils';
+```
+
+**推荐使用方法**  
+
+引入需要使用的方法
+``` javascript
+// 只引入部分方法('@ssports_fe/ssutils/<方法名>')
+const browser = require('@ssports_fe/ssutils/browser')
 ```
 
