@@ -21,7 +21,7 @@
 
 ### yarn or npm
 ```bash
-$ yarn install --dev @ssports_fe/ssutils
+$ yarn add --dev @ssports_fe/ssutils
 $ npm install --save-dev @ssports_fe/ssutils
 ```
 
