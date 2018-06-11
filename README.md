@@ -21,8 +21,8 @@
 
 ### yarn or npm
 ```bash
-$ yarn install --dev ssutils
-$ npm install --save-dev ssutils
+$ yarn add --dev @ssports_fe/ssutils
+$ npm install --save-dev @ssports_fe/ssutils
 ```
 
 webpack、RequireJS、SeaJS等
