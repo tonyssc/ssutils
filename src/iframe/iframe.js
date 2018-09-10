@@ -16,14 +16,14 @@ const setParentTitle = title => {
     if (window.top !== window.self) {
         window.top.document.title = title;
     } else {
-        console.error('This page is not include by other pages.');
+        console.error('当前页面没有作为iframe嵌入其他页面！');
     }
 }
 
 /**
  *
  * @desc  iframe父级页面跳转
- * @param 跳转的页面地址 {String} url 
+ * @param 跳转的页面地址 {String} url
  */
 const reloadIframeUrl = url => {
     if (url && Type.url.isString) {
