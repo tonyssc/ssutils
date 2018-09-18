@@ -4,8 +4,6 @@
  * @author sunshaocheng
  */
 
-
-
 /**
  *
  * @desc 获取滚动条距顶部的距离
@@ -218,12 +216,12 @@ const off = (function() {
     }
 })();
 
-module.exports = { 
-    getScrollTop, 
-    setScrollTop, 
-    offset, 
-    windowResize, 
-    scrollTo, 
+module.exports = {
+    getScrollTop,
+    setScrollTop,
+    offset,
+    windowResize,
+    scrollTo,
     hasClass,
     addClass,
     removeClass,
