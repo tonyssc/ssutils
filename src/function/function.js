@@ -112,4 +112,133 @@ const debounce = (delay, atBegin, callback) => {
     return callback === 'undefined' ? throttle(delay, atBegin, false) : throttle(delay, callback, atBegin !== false);
 };
 
-module.exports = { throttle, debounce };
+// watch DOM change
+export const MutationObserver = isServer ? false : window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver || false;
+
+const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
+const MOZ_HACK_REGEXP = /^moz([A-Z])/;
+
+function camelCase(name) {
+    return name.replace(SPECIAL_CHARS_REGEXP, function(_, separator, letter, offset) {
+        return offset ? letter.toUpperCase() : letter;
+    }).replace(MOZ_HACK_REGEXP, 'Moz$1');
+}
+
+function firstUpperCase(str) {
+    return str.toString()[0].toUpperCase() + str.toString().slice(1);
+}
+
+// scrollTop animation
+const scrollTop = (el, from = 0, to, duration = 500, endCallback) => {
+    if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = (
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.msRequestAnimationFrame ||
+            function(callback) {
+                return window.setTimeout(callback, 1000 / 60);
+            }
+        );
+    }
+    const difference = Math.abs(from - to);
+    const step = Math.ceil(difference / duration * 50);
+
+    function scroll(start, end, step) {
+        if (start === end) {
+            endCallback && endCallback();
+            return;
+        }
+
+        let d = (start + step > end) ? end : start + step;
+        if (start > end) {
+            d = (start - step < end) ? end : start - step;
+        }
+
+        if (el === window) {
+            window.scrollTo(d, d);
+        } else {
+            el.scrollTop = d;
+        }
+        window.requestAnimationFrame(() => scroll(d, end, step));
+    }
+    scroll(from, to, step);
+}
+
+// Find components upward
+const findComponentUpward = (context, componentName, componentNames) => {
+    if (typeof componentName === 'string') {
+        componentNames = [componentName];
+    } else {
+        componentNames = componentName;
+    }
+
+    let parent = context.$parent;
+    let name = parent.$options.name;
+    while (parent && (!name || componentNames.indexOf(name) < 0)) {
+        parent = parent.$parent;
+        if (parent) name = parent.$options.name;
+    }
+    return parent;
+}
+
+// Find component downward
+const findComponentDownward = (context, componentName) => {
+    const childrens = context.$children;
+    let children = null;
+
+    if (childrens.length) {
+        for (const child of childrens) {
+            const name = child.$options.name;
+            if (name === componentName) {
+                children = child;
+                break;
+            } else {
+                children = findComponentDownward(child, componentName);
+                if (children) break;
+            }
+        }
+    }
+    return children;
+}
+
+// Find components downward
+const findComponentsDownward = (context, componentName) => {
+    return context.$children.reduce((components, child) => {
+        if (child.$options.name === componentName) components.push(child);
+        const foundChilds = findComponentsDownward(child, componentName);
+        return components.concat(foundChilds);
+    }, []);
+}
+
+// Find components upward
+const findComponentsUpward = (context, componentName) => {
+    let parents = [];
+    const parent = context.$parent;
+    if (parent) {
+        if (parent.$options.name === componentName) parents.push(parent);
+        return parents.concat(findComponentsUpward(parent, componentName));
+    } else {
+        return [];
+    }
+}
+
+// Find brothers components
+const findBrothersComponents = (context, componentName, exceptMe = true) => {
+    let res = context.$parent.$children.filter(item => {
+        return item.$options.name === componentName;
+    });
+    let index = res.findIndex(item => item._uid === context._uid);
+    if (exceptMe) res.splice(index, 1);
+    return res;
+}
+
+module.exports = { 
+    throttle, 
+    debounce,
+    scrollTop,
+    findComponentUpward,
+    findComponentDownward,
+    findComponentsDownward,
+    findComponentsUpward,
+    findBrothersComponents
+};

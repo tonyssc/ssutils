@@ -114,4 +114,11 @@ const getNewApiUrl = type => {
     return apiUrl;
 };
 
-module.exports = { getPageName, getQueryString, getHash, parseQueryString, stringfyQueryString, getNewApiUrl };
+module.exports = { 
+    getPageName, 
+    getQueryString, 
+    getHash, 
+    parseQueryString, 
+    stringfyQueryString, 
+    getNewApiUrl 
+};
