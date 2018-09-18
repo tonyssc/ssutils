@@ -32,4 +32,5 @@ const Type = {
         return this.isPrototype(para) === '[object null]';
     }
 };
+
 module.exports = { Type };
